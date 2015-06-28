@@ -3,62 +3,62 @@
 			<div class="widget widget-4 row-fluid widget-tabs widget-tabs-2">
 
 <?php 
-$this->load->view('template/menu_tab', array('hal'=>'anggota'));
+$this->load->view('template/menu_tab', array('hal'=>'keanggotaan'));
 
 $atribut=array('class'=>'form-horizontal','style'=>'margin-bottom: 0;');
 echo form_open('',$atribut)?>
 	
-	<h4>Tambah Anggota</h4>
+	<h4>Tambah Keanggotaan</h4>
 	<hr class="separator line" />
 	<div class="row-fluid">
 		<div class="span6">
 			<div class="control-group">
-				<label class="control-label" for="firstname">NO ANGGOTA</label>
+				<label class="control-label" for="lastname">JENIS</label>
 				<div class="controls">
-					<input class="span12" id="firstname" name="kode" type="text" value="<?php echo set_value('kode')?>" required autofocus/>
-					<?php echo form_error('kode','<label class="label-warning">','</label>'); ?>
+					<input class="span12" id="lastname" name="jenis" type="text" value="<?php echo $row->jenis?>" required/>
+					<?php echo form_error('jenis','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="lastname">NAMA</label>
+				<label class="control-label" for="lastname">SIMPANAN POKOK</label>
 				<div class="controls">
-					<input class="span12" id="lastname" name="nama" type="text" value="<?php echo set_value('nama')?>" required/>
-					<?php echo form_error('nama','<label class="label-warning">','</label>'); ?>
+					<input class="span12" id="simpanan_pokok" name="simpanan_pokok" type="text" value="<?php echo $row->simpanan_pokok?>" required/>
+					<?php echo form_error('simpanan_pokok','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="alamat">ALAMAT</label>
+				<label class="control-label" for="simpanan_wajib">SIMPANAN WAJIB</label>
 				<div class="controls">
-					<textarea class="span12" id="alamat" name="alamat"><?php echo set_value('alamat')?></textarea>
-					<?php echo form_error('alamat','<label class="label-warning">','</label>'); ?>
+					<input class="span12" id="simpanan_wajib" name="simpanan_wajib" type="text" value="<?php echo $row->simpanan_wajib?>" required/>
+					<?php echo form_error('simpanan_wajib','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="hp">HP</label>
+				<label class="control-label" for="bunga_simpanan">BUNGA SIMPANAN</label>
 				<div class="controls">
-					<input class="span12" id="hp" name="hp" type="text" value="<?php echo set_value('hp')?>" />
-					<?php echo form_error('hp','<label class="label-warning">','</label>'); ?>
+					<input class="span12" id="bunga_simpanan" name="bunga_simpanan" type="text" value="<?php echo $row->bunga_simpanan?>" required/>
+					<?php echo form_error('bunga_simpanan','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="lastname">KEANGGOTAAN</label>
+				<label class="control-label" for="bunga_pinjaman">BUNGA PINJAMAN</label>
 				<div class="controls">
-					<?php 
-					$dropdownKeanggotaan = $this->addon->getOptionKeanggotaan();
-					 echo form_dropdown('keanggotaan_id',$dropdownKeanggotaan,set_value('keanggotaan_id'),'required="required"');?>
+					<input class="span12" id="bunga_pinjaman" name="bunga_pinjaman" type="text" value="<?php echo $row->bunga_pinjaman?>" required/>
+					<?php echo form_error('bunga_pinjaman','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="username">DEPARTEMEN</label>
+				<label class="control-label" for="denda_pinjaman">DENDA PINJAMAN</label>
 				<div class="controls">
-					<input class="span12" id="username" name="departemen" type="text" value="<?php echo set_value('departemen')?>" />
+					<input class="span12" id="denda_pinjaman" name="jenis" type="text" value="<?php echo $row->denda_pinjaman?>" required/>
+					<?php echo form_error('denda_pinjaman','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="lembar2">TANGGAL MASUK</label>
+				<label class="control-label" for="keterangan">KETERANGAN</label>
 				<div class="controls">
-					<input class="span12" id="lembar2" name="tgl_masuk" type="date" value="<?php echo set_value('tgl_masuk')?>" required/>
-					<?php echo form_error('tgl_masuk','<label class="label-warning">','</label>'); ?>
+					<input class="span12" id="keterangan" name="keterangan" type="text" value="<?php echo $row->keterangan?>" required/>
+					<?php echo form_error('keterangan','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
 		</div>

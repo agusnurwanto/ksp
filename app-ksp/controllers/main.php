@@ -11,6 +11,7 @@ class Main extends CI_Controller {
 		$this->load->library('export');
 		$this->load->library('form_validation');
 		$this->load->model('trs');
+		$this->load->model('Preference_model');
 		// $this->trs->cekSimpananPokok('001');
 		if(!$this->trs->last_check_bunga()){
 			$this->trs->addBunga();
@@ -145,6 +146,7 @@ class Main extends CI_Controller {
 					break;
 				case 'detail':
 					$data['data'] = $id;
+					$data['kop'] = $this->Preference_model->get();
 					$this->_template('nasabah/detail_nasabah',$data);
 					break;
 				default:
@@ -257,6 +259,7 @@ class Main extends CI_Controller {
 					break;
 				case 'detail':
 					$data['kode'] = $id;
+					$data['kop'] = $this->Preference_model->get();
 					$this->_template('simpanan/detail_simpanan',$data);
 					break;
 				case 'ambil':
@@ -279,7 +282,8 @@ class Main extends CI_Controller {
 						$data['simpanan'] = $this->mdb->getLaporanSimpanan();
 						$this->load->view('simpanan/export',$data);
 					}else{
-						$this->_template('simpanan/laporan_simpanan');
+						$data['kop'] = $this->Preference_model->get();
+						$this->_template('simpanan/laporan_simpanan', $data);
 					}
 					break;
 				case 'delete':
@@ -348,6 +352,7 @@ class Main extends CI_Controller {
 					break;
 				case 'detail':
 					$data['kode'] = $id;
+					$data['kop'] = $this->Preference_model->get();
 					$this->_template('pinjaman/detail_pinjaman',$data);
 					break;
 				case 'bayar':
@@ -374,7 +379,8 @@ class Main extends CI_Controller {
 						$data['pinjaman'] = $this->mdb->getLaporanPinjaman();
 						$this->load->view('pinjaman/export',$data);
 				}else{
-					$this->_template('pinjaman/laporan_pinjaman');
+					$data['kop'] = $this->Preference_model->get();
+					$this->_template('pinjaman/laporan_pinjaman', $data);
 				}
 					break;
 				default:

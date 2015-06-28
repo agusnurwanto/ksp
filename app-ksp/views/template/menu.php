@@ -19,25 +19,19 @@
 						<li <?php if('pinjaman'==$this->uri->segment(2)) echo 'class="active"';?>>
 							<a href="<?php echo site_url('main/pinjaman')?>" class="menuToggle">Pinjaman</a>
 						</li>
-						<li <?php if('keanggotaan'==$this->uri->segment(2)) echo 'class="active"';?>>
-							<a href="<?php echo site_url('main/keanggotaan')?>" class="menuToggle">Keanggotaan</a>
+						<li <?php if('laporan'==$this->uri->segment(1)) echo 'class="active"';?>>
+							<a href="<?php echo site_url('laporan')?>" class="menuToggle">laporan</a>
 						</li>
-						<!-- <li <?php if('payroll'==$this->uri->segment(2)) echo 'class="active"';?>>
-							<a href="<?php echo site_url('main/payroll')?>" class="menuToggle">Adjust Payroll</a>
-						</li> -->
 						<?php if($this->session->userdata('level')=="admin"){?>
-						<li <?php if('user'==$this->uri->segment(2)) echo 'class="active"';?>><a href="<?php echo site_url('main/user')?>"><span>Admin</span></a></li>
 						<?php } ?>
-						<!-- <li>
+						<li <?php if('user'==$this->uri->segment(2) || 'keanggotaan'==$this->uri->segment(2) || 'logo'==$this->uri->segment(1)) echo 'class="active"';?>>
 							<a href="#" class="menuToggle">Pengaturan</a>
 							<ul class="menu hide">
-								<li class=""><a href="<?php echo site_url('main/kelas')?>"><span>Kelas</span></a></li>
-								<li class=""><a href="<?php echo site_url('main/akunting')?>"><span>Akunting</span></a></li>
-								<li class=""><a href="<?php echo site_url('main/kop')?>"><span>Kop Profil</span></a></li>
-								<?php if($this->session->userdata('level')=="admin"){?><li class=""><a href="<?php echo site_url('main/user')?>"><span>Admin</span></a></li>
-								<?php } ?>
+								<li <?php if('user'==$this->uri->segment(2)) echo 'class="active"';?>><a href="<?php echo site_url('main/user')?>"><span>Admin</span></a></li>
+								<li <?php if('keanggotaan'==$this->uri->segment(2)) echo 'class="active"';?>><a href="<?php echo site_url('main/keanggotaan')?>">Keanggotaan</a></li>
+								<li <?php if('logo'==$this->uri->segment(1)) echo 'class="active"';?>><a href="<?php echo site_url('logo')?>">Logo</a></li>
 							</ul>
-						</li> -->
+						</li>
 						<!-- <li class="hidden-phone">
 							<a href="#themer" data-toggle="collapse"><span>Tema</span></a>
 							<div id="themer" class="collapse">

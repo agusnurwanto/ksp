@@ -2,8 +2,11 @@
 $pinjaman = $this->mdb->getPinjaman($kode);
 foreach ($pinjaman as $key); 
  ?>
+
+
 <div class="container-fluid fixed">
 	<div id="content">
+ <?php echo $this->load->view('kop') ?>
 <div class="separator"></div>
 <div class="widget widget-4 widget-body-white">
 	<?php if($key->status==0) {?> <div class="pull-right"><a href="<?php echo site_url('main/pinjaman/edit/'.$key->kode_nasabah.'?nominal='.$key->jumlah.'&lama='.$key->lama) ?>" class="btn btn-warning">EDIT</a></div> <?php } ?>
@@ -164,6 +167,12 @@ if($i>0) $bayar = $angsuran+$jasa;
 
 	</tbody>
 </table>
+	<div class="visible-print pull-right">
+		<br><br><br>Admin<br><br><br>
+		<?php echo $this->session->userdata('nama'); ?>
+		<br>
+		<small>	<?php echo date('H:i:s d/m/Y') ?></small>
+	</div>
 </div>
 
 <!-- END ITUNG -->

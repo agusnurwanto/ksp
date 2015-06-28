@@ -4,6 +4,8 @@
 
 <?php $this->load->view('template/menu_tab', array('hal'=>'simpanan'));?>
 <hr>
+<?php echo $this->load->view('kop') ?>
+
 	<div class="heading-buttons">
 		<?php 
 				$periode = ($this->input->get('per')) ? $this->input->get('per') : '';
@@ -71,5 +73,12 @@
 				
 			</tbody>
 		</table>
+
+		<div class="visible-print pull-right">
+			<br><br><br>Admin<br><br><br>
+			<?php echo $this->session->userdata('nama'); ?>
+			<br>
+			<small>	<?php echo date('H:i:s d/m/Y') ?></small>
+		</div>
 	</div>
 </div>

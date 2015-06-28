@@ -14,14 +14,17 @@
 <div class="widget widget-4 widget-body-white widget-tabs widget-tabs-2">
 <?php $this->load->view('template/menu_tab', array('hal'=>'pinjaman'));?>
 <br>
+
+<?php echo $this->load->view('kop') ?>
+<?php echo form_open('','method="get"'); ?>
+			
 <div class="heading-buttons">
-	<div class="pull-left">
+	<!-- <div class="pull-left">
 		<h4 class="heading"><?php
-			echo form_open('','method="get"');
 			echo 'Jenis : '.form_dropdown('jenis', array(''=>'-- Semua --','Uang'=>'Uang','Barang'=>'Barang'), $this->input->get('jenis'), 'onChange="this.form.submit()"');
 			?>
 		</h4>
-	</div>
+	</div> -->
 	<div class="pull-right">
 		<h4 class="heading"><?php
 			$dropdown = $this->mdb->getPeriodePinjaman();
@@ -50,5 +53,13 @@
 			<tbody>	
 			</tbody>
 		</table>
+
+		<div class="visible-print pull-right">
+			<br><br><br>Admin<br><br><br>
+			<?php echo $this->session->userdata('nama'); ?>
+			<br>
+			<small>	<?php echo date('H:i:s d/m/Y') ?></small>
+		</div>
+
 	</div>
 </div>
