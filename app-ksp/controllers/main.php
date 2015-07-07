@@ -346,7 +346,7 @@ class Main extends CI_Controller {
 					}
 					else
 					{
-						$this->mdb->edit_pinjaman();
+						$this->mdb->edit_pinjaman($id);
 						redirect('main/pinjaman');
 					}
 					break;

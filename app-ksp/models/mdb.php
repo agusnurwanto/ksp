@@ -108,6 +108,20 @@ class Mdb extends CI_Model
         $this->db->insert('pinjaman',$this);
     }
 
+    function edit_pinjaman($id)
+    {
+        $time = strtotime($this->input->post('tanggal'));
+        $tanggal = mdate('%Y-%m-%d',$time);
+        
+        $this->tanggal = $tanggal;
+        $this->jumlah = $this->input->post('nominal');
+        $this->bunga = $this->input->post('bunga');
+        $this->total_bayar = $this->input->post('total_bayar');
+        $this->lama = $this->input->post('lama');
+
+        $this->db->update('pinjaman', $this, array('kode_nasabah'=>$id));
+    }
+
     function formSimpan($kode)
     {
         $this->db->select('nasabah.id as id_nasabah, nasabah.kode, nasabah.nama, nasabah.departemen, simpanan2.jumlah, simpanan2.id, simpanan2.sld as saldo', FALSE);
