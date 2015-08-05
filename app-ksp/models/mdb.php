@@ -261,8 +261,8 @@ class Mdb extends CI_Model
 
     function getPinjaman($id)
     {
-        $this->db->select('*');
-        $this->db->where('pinjaman.kode_nasabah', $id);
+        $this->db->select('*, pinjaman.id as pinjaman_id');
+        $this->db->where('pinjaman.id', $id);
         $this->db->join('nasabah', 'nasabah.kode=pinjaman.kode_nasabah');
         $query = $this->db->get('pinjaman');
         
@@ -271,6 +271,7 @@ class Mdb extends CI_Model
 
     function bayarPinjaman()
     {
+        $this->pinjaman_id = $this->input->post('pinjaman_id');
         $this->kode_nasabah = $this->input->post('kode_nasabah');
         $this->cicilan_ke = $this->input->post('cicilan_ke');
         $this->jumlah = $this->input->post('nominal');
@@ -280,12 +281,26 @@ class Mdb extends CI_Model
         $this->tanggal = $tanggal;
 
         $this->db->insert('cicilan', $this);
-        $this->setStatusPinjaman($this->kode_nasabah, $this->cicilan_ke);
+        $this->setStatusPinjaman($this->pinjaman_id, $this->cicilan_ke);
+
+        if($this->input->post('denda')>0){
+            $this->insertDenda($this->kode_nasabah, $this->pinjaman_id, $this->cicilan_ke, $this->input->post('denda'), $tanggal);
+        }
     }
 
-    function setStatusPinjaman($kode, $ke)
+    function insertDenda($kode_nasabah, $pinjaman_id, $cicilan_ke, $jumlah, $tanggal)
     {
-        $this->db->where('kode_nasabah', $kode);
+        $this->kode_nasabah = $kode_nasabah;
+        $this->pinjaman_id = $pinjaman_id;
+        $this->cicilan_ke = $cicilan_ke;
+        $this->jumlah = $jumlah;
+        $this->tanggal = $tanggal;
+        $this->db->insert('denda', $this);
+    }
+
+    function setStatusPinjaman($id, $ke)
+    {
+        $this->db->where('id', $id);
         $this->db->where('status !=', 'LUNAS');
         $this->db->update('pinjaman', array('status'=>$ke));
     }

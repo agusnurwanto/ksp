@@ -21,6 +21,7 @@
 					<th>SIMP_POKOK (Rp)</th>
 					<th>SIMP_WAJIB (Rp)</th>
 					<th>BUNGA_SIMP (%)</th>
+					<th>BUNGA_PINJ (%)</th>
 					<th>DENDA_PINJ (x Bunga)</th>
 					<th>KET</th>
 					<th class="hidden-print" width="13%">ACTION</th>

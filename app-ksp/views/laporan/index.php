@@ -72,7 +72,7 @@
 							?>
 						</td>
 						<td><?php 
-							if($key->tabel == 'cicilan') {
+							if($key->tabel == 'cicilan' || $key->tabel == 'denda') {
 								$ket = "Cicilan ke";
 							}else if($key->tabel == 'pinjaman'){
 								$ket = "Lama pinjaman";

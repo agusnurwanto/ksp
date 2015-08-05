@@ -1,5 +1,5 @@
 <?php 
-$pinjaman = $this->mdb->getPinjaman($kode);
+$pinjaman = $this->mdb->getPinjaman($id);
 foreach ($pinjaman as $key); 
  ?>
 
@@ -30,9 +30,13 @@ $bunga = $key->bunga/100;
 $angsur = $key->lama;
 $angsuran = $pinjam/$angsur;
 
+$kode = $key->kode;
+
+$peminjamantime = strtotime($key->tanggal);
+
 // $selisih_koma = min(($pinjam%$angsur), ($angsur-($pinjam%$angsur)));
 function fbuatrp($angka){
-        $jadi = "Rp " . number_format($angka,0,',',',');
+        $jadi =  number_format($angka,0,',',',');
         return $jadi;
 }
 
@@ -46,6 +50,7 @@ function fbuatrp($angka){
 		<th>Jasa Uang</th>
 		<th>Total Bayar</th>
 		<th>Saldo</th>
+		<th>Jth_Tempo</th>
 		<th>Tgl_Bayar</th>
 	</tr>
 	</thead>
@@ -74,10 +79,15 @@ if($i>0) $bayar = $angsuran+$jasa;
 			// echo round($saldo[$i]);
 			?>
 		</td>
+		<td><?php 
+			$tempotime = mktime(0, 0, 0, date("m", $peminjamantime)+$i, date("d", $peminjamantime), date("Y", $peminjamantime));
+			$tanggal_jatuh_tempo = date('Y-m-d', $tempotime);
+			if($i>0) echo $tanggal_jatuh_tempo;
+			 ?></td>
 		<td>
 			<?php 
 			if($i!=0){
-				$c = $this->trs->getCicilan($kode, $i);
+				$c = $this->trs->getCicilan($id, $i);
 				foreach ($c as $k);
 				if($i<=$key->status)
 				{ 
@@ -87,8 +97,8 @@ if($i>0) $bayar = $angsuran+$jasa;
 				{
 					if($k->cicilan_ke+1 == $i)
 					{
-						echo '<a href="'.site_url('main/pinjaman/bayar').'?kode='.$kode.'&cicilan_ke='.$i.'&jumlah='.round($bayar).'" type="button" class="btn btn-inverse btn-mini hidden-print"><i></i>BAYAR</a>';
-						echo '<a onclick="return confirm(\'Lunasi seluruh angsuran dengan total '.fbuatrp(round($saldo[$i])).'?\')" href="'.site_url('main/pinjaman/bayar').'?kode='.$kode.'&cicilan_ke='.$key->lama.'&jumlah='.round($saldo[$i]).'" type="button" class="btn btn-warning btn-mini hidden-print"><i></i>Lunasi</a>';
+						echo '<a href="'.site_url('main/pinjaman/bayar').'?kode='.$kode.'&id='.$id.'&cicilan_ke='.$i.'&jumlah='.round($bayar).'&jatuh_tempo='.$tanggal_jatuh_tempo.'&jasa='.round($jasa).'" type="button" class="btn btn-inverse btn-mini hidden-print"><i></i>BAYAR</a>';
+						echo '<a onclick="return confirm(\'Lunasi seluruh angsuran dengan total '.fbuatrp(round($saldo[$i])).'?\')" href="'.site_url('main/pinjaman/bayar').'?kode='.$kode.'&id='.$id.'&cicilan_ke='.$key->lama.'&jumlah='.round($saldo[$i]).'" type="button" class="btn btn-warning btn-mini hidden-print"><i></i>Lunasi</a>';
 					}
 				}
 			}

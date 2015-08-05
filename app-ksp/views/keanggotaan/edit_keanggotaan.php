@@ -36,28 +36,28 @@ echo form_open('',$atribut)?>
 			<div class="control-group">
 				<label class="control-label" for="bunga_simpanan">BUNGA SIMPANAN</label>
 				<div class="controls">
-					<input class="span12" id="bunga_simpanan" name="bunga_simpanan" type="text" value="<?php echo $row->bunga_simpanan?>" required/>
+					<input class="span4" id="bunga_simpanan" name="bunga_simpanan" type="text" value="<?php echo $row->bunga_simpanan?>" required/> %
 					<?php echo form_error('bunga_simpanan','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="bunga_pinjaman">BUNGA PINJAMAN</label>
 				<div class="controls">
-					<input class="span12" id="bunga_pinjaman" name="bunga_pinjaman" type="text" value="<?php echo $row->bunga_pinjaman?>" required/>
+					<input class="span4" id="bunga_pinjaman" name="bunga_pinjaman" type="text" value="<?php echo $row->bunga_pinjaman?>" required/> %
 					<?php echo form_error('bunga_pinjaman','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="denda_pinjaman">DENDA PINJAMAN</label>
 				<div class="controls">
-					<input class="span12" id="denda_pinjaman" name="jenis" type="text" value="<?php echo $row->denda_pinjaman?>" required/>
+					<input class="span4" id="denda_pinjaman" name="denda_pinjaman" type="text" value="<?php echo $row->denda_pinjaman?>" required/> X Jasa Per Bulan
 					<?php echo form_error('denda_pinjaman','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="keterangan">KETERANGAN</label>
 				<div class="controls">
-					<input class="span12" id="keterangan" name="keterangan" type="text" value="<?php echo $row->keterangan?>" required/>
+					<input class="span12" id="keterangan" name="keterangan" type="text" value="<?php echo $row->keterangan?>" readonly/>
 					<?php echo form_error('keterangan','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
