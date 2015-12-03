@@ -205,7 +205,7 @@ CREATE TABLE `view_laporan` (
 
 DROP TABLE `view_laporan`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_laporan`
+CREATE VIEW `view_laporan`
 AS SELECT
    `simpanan`.`id` AS `id`,'simpanan' AS `tabel`,
    `simpanan`.`kode_nasabah` AS `kode_nasabah`,'' AS `debet`,
