@@ -46,6 +46,7 @@ class Ajax extends CI_Controller{
 			foreach ($denda_db as $key);
 			$denda_pinjaman = $key['denda_pinjaman'];
 			$denda = $selisih * $denda_pinjaman * $jasa;
+			// var_dump($denda_pinjaman);
 		}else{
 			$selisih=$denda_pinjaman=$denda= 0;
 		}

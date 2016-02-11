@@ -20,6 +20,7 @@
 					<th>JENIS</th>
 					<th>SIMP_POKOK (Rp)</th>
 					<th>SIMP_WAJIB (Rp)</th>
+					<th>JENIS_BUNGA</th>
 					<th>BUNGA_SIMP (%)</th>
 					<th>BUNGA_PINJ (%)</th>
 					<th>DENDA_PINJ (x Bunga)</th>

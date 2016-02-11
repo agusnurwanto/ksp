@@ -11,6 +11,7 @@ class Keanggotaan extends CI_Model
     function edit($id)
     {
         $this->jenis = $this->input->post('jenis');
+        $this->jenis_bunga = $this->input->post('jenis_bunga');
         $this->simpanan_pokok = $this->input->post('simpanan_pokok');
         $this->simpanan_wajib = $this->input->post('simpanan_wajib');
         $this->bunga_simpanan = $this->input->post('bunga_simpanan');

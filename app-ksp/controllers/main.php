@@ -164,7 +164,7 @@ class Main extends CI_Controller {
 		{
 			$this->output->enable_profiler(FALSE);
 			$this->load->library('datatables');
-	        $this->datatables->select('id, jenis,simpanan_pokok, simpanan_wajib, bunga_simpanan, bunga_pinjaman, denda_pinjaman, keterangan');
+	        $this->datatables->select('id, jenis,simpanan_pokok, simpanan_wajib, jenis_bunga,bunga_simpanan, bunga_pinjaman, denda_pinjaman, keterangan');
 	        $this->datatables->from('keanggotaan');
 	        $this->datatables->add_column('Action_data', anchor('main/keanggotaan/edit/$1','EDIT','class="btn btn-warning btn-mini hidden-print"'), 'id');
 	        	// anchor('main/keanggotaan/delete/$1','DELETE',array('class'=>'btn btn-danger btn-mini hidden-print', 'onClick'=>'return confirm(\'Apakah Anda benar-benar akan menghapus data ini?\')')), 'id');
@@ -175,6 +175,7 @@ class Main extends CI_Controller {
 			$this->form_validation->set_rules('jenis', 'Jenis', 'trim|required');
 			$this->form_validation->set_rules('simpanan_pokok', 'Simpanan Pokok', 'trim|required');
 			$this->form_validation->set_rules('simpanan_wajib', 'Simpanan Wajib', 'trim|required');
+			$this->form_validation->set_rules('jenis_bunga', 'Jenis Bunga', 'trim|required');
 			$this->form_validation->set_rules('bunga_simpanan', 'Bunga Simpanan', 'trim|required');
 			$this->form_validation->set_rules('bunga_pinjaman', 'Bunga Pinjaman', 'trim|required');
 			$this->form_validation->set_rules('denda_pinjaman', 'Denda Pinjaman', 'trim|required');

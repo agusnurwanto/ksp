@@ -34,6 +34,16 @@ echo form_open('',$atribut)?>
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label" for="jenis_bunga">JENIS BUNGA</label>
+				<div class="controls">
+					<select class="span12" name="jenis_bunga">
+						<option <?php if($row->jenis_bunga == 'tetap') echo 'selected' ?> value="tetap">Tetap</option>
+						<option <?php if($row->jenis_bunga == 'turunan') echo 'selected' ?> value="turunan">Turunan</option>
+					</select>
+					<?php echo form_error('jenis_bunga','<label class="label-warning">','</label>'); ?>
+				</div>
+			</div>
+			<div class="control-group">
 				<label class="control-label" for="bunga_simpanan">BUNGA SIMPANAN</label>
 				<div class="controls">
 					<input class="span4" id="bunga_simpanan" name="bunga_simpanan" type="text" value="<?php echo $row->bunga_simpanan?>" required/> %

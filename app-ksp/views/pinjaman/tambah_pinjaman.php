@@ -110,7 +110,11 @@ if($this->input->get('itung')){
 </div>
 <?php
 	if ($this->input->get('itung')) {
-		$this->load->view('pinjaman/itung');
+		if($key->jenis_bunga == 'turunan'){
+			$this->load->view('pinjaman/itung');
+		}else{
+			$this->load->view('pinjaman/itung_tetap');
+		}
 	}
 ?>
 
