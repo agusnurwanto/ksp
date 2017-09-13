@@ -77,9 +77,9 @@ class Trs extends CI_Model
         }
     }
 
-    function getCicilan($kode, $cicilan_ke)
+    function getCicilan($id, $cicilan_ke)
     {
-        $this->db->where('kode_nasabah', $kode);
+        $this->db->where('pinjaman_id', $id);
         $this->db->where('cicilan_ke', $cicilan_ke);
         $query = $this->db->get('cicilan');
         return $query->result();

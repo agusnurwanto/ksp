@@ -14,6 +14,9 @@
 <div class="widget widget-4 widget-body-white widget-tabs widget-tabs-2">
 <?php $this->load->view('template/menu_tab', array('hal'=>'simpanan'));?>
 <br>
+
+<?php echo $this->load->view('kop') ?>
+
 <div class="heading-buttons">
 	<div class="pull-left">
 		<h4 class="heading"><?php
@@ -53,5 +56,11 @@
 			<tbody>	
 			</tbody>
 		</table>
+		<div class="visible-print pull-right">
+			<br><br><br>Admin<br><br><br>
+			<?php echo $this->session->userdata('nama'); ?>
+			<br>
+			<small>	<?php echo date('H:i:s d/m/Y') ?></small>
+		</div>
 	</div>
 </div>

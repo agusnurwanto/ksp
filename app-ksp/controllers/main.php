@@ -11,6 +11,7 @@ class Main extends CI_Controller {
 		$this->load->library('export');
 		$this->load->library('form_validation');
 		$this->load->model('trs');
+		$this->load->model('Preference_model');
 		// $this->trs->cekSimpananPokok('001');
 		if(!$this->trs->last_check_bunga()){
 			$this->trs->addBunga();
@@ -99,8 +100,8 @@ class Main extends CI_Controller {
 	        $this->datatables->add_column('Action_Simpan/pinjam',
 	        	anchor('main/simpanan/add?kode=$1', 'SIMPAN','class="btn btn-success btn-mini hidden-print"').' '.
 	        	anchor('main/simpanan/ambil?kode=$1', 'AMBIL','class="btn btn-info btn-mini hidden-print"').' '.
-	        	anchor('main/pinjaman/add?kode=$1', 'PINJAM','class="btn btn-default btn-mini hidden-print"').' '.
-	        	anchor('main/pinjaman/bayar?kode=$1', 'BAYAR','class="btn btn-inverse btn-mini hidden-print"')
+	        	anchor('main/pinjaman/add?kode=$1', 'PINJAM','class="btn btn-default btn-mini hidden-print"')
+	        	// anchor('main/pinjaman/detail/$1', 'BAYAR','class="btn btn-inverse btn-mini hidden-print"')
 	        	,'kode');
 	        echo $this->datatables->generate();
 		}
@@ -145,6 +146,7 @@ class Main extends CI_Controller {
 					break;
 				case 'detail':
 					$data['data'] = $id;
+					$data['kop'] = $this->Preference_model->get();
 					$this->_template('nasabah/detail_nasabah',$data);
 					break;
 				default:
@@ -156,30 +158,33 @@ class Main extends CI_Controller {
 
 	public function keanggotaan($action='', $id='')
 	{
+		$this->load->model('keanggotaan');
 		if($this->session->userdata('logged_in')!=TRUE) redirect('main/logout');
 		if($this->input->is_ajax_request()/*||$this->input->get('data')*/)
 		{
 			$this->output->enable_profiler(FALSE);
 			$this->load->library('datatables');
-	        $this->datatables->select('id, jenis,simpanan_pokok, simpanan_wajib, bunga_simpanan, denda_pinjaman, keterangan');
+	        $this->datatables->select('id, jenis,simpanan_pokok, simpanan_wajib, jenis_bunga,bunga_simpanan, bunga_pinjaman, denda_pinjaman, keterangan');
 	        $this->datatables->from('keanggotaan');
-	        $this->datatables->add_column('Action_data', anchor('main/keanggotaan/edit/$1','EDIT','class="btn btn-warning btn-mini hidden-print"').
-	        	anchor('main/keanggotaan/delete/$1','DELETE',array('class'=>'btn btn-danger btn-mini hidden-print', 'onClick'=>'return confirm(\'Apakah Anda benar-benar akan menghapus data ini?\')')), 'id');
+	        $this->datatables->add_column('Action_data', anchor('main/keanggotaan/edit/$1','EDIT','class="btn btn-warning btn-mini hidden-print"'), 'id');
+	        	// anchor('main/keanggotaan/delete/$1','DELETE',array('class'=>'btn btn-danger btn-mini hidden-print', 'onClick'=>'return confirm(\'Apakah Anda benar-benar akan menghapus data ini?\')')), 'id');
 	        echo $this->datatables->generate();
 		}
 		else
 		{
-			$this->form_validation->set_rules('nama', 'Nama anggota', 'trim|required');
-			$this->form_validation->set_rules('alamat', 'Alamat', 'trim');
-			$this->form_validation->set_rules('hp', 'HP', 'trim');
-			$this->form_validation->set_rules('keanggotaan_id', 'Keanggotaan', 'trim|required');
-			$this->form_validation->set_rules('tgl_masuk', 'Tanggal masuk', 'trim|required');
+			$this->form_validation->set_rules('jenis', 'Jenis', 'trim|required');
+			$this->form_validation->set_rules('simpanan_pokok', 'Simpanan Pokok', 'trim|required');
+			$this->form_validation->set_rules('simpanan_wajib', 'Simpanan Wajib', 'trim|required');
+			$this->form_validation->set_rules('jenis_bunga', 'Jenis Bunga', 'trim|required');
+			$this->form_validation->set_rules('bunga_simpanan', 'Bunga Simpanan', 'trim|required');
+			$this->form_validation->set_rules('bunga_pinjaman', 'Bunga Pinjaman', 'trim|required');
+			$this->form_validation->set_rules('denda_pinjaman', 'Denda Pinjaman', 'trim|required');
+			$this->form_validation->set_rules('keterangan', 'Keterangan', 'trim|required');
 			$this->form_validation->set_message('required', 'Harus diisi.');
-			$this->form_validation->set_message('is_unique', 'Sudah ada didatabase.');
 
 			switch ($action) 
 			{
-				case 'add':
+				/*case 'add':
 					$this->form_validation->set_rules('kode', 'Kode anggota', 'trim|required|is_unique[keanggotaan.kode]');
 					if ($this->form_validation->run() == FALSE)
 					{
@@ -190,22 +195,21 @@ class Main extends CI_Controller {
 						$this->mdb->add_nasabah();
 						redirect('main/keanggotaan');
 					}
-					break;
+					break;*/
 				case 'edit':
-					$this->form_validation->set_rules('kode', 'Kode anggota', 'trim|required|is_unique[keanggotaan.kode.id.'.$id.']');
 					if ($this->form_validation->run() == FALSE)
 					{
 						$this->_edit('keanggotaan',$id);
 					}
 					else
 					{
-						$this->mdb->edit_nasabah($id);
+						$this->keanggotaan->edit($id);
 						redirect('main/keanggotaan');
 					}
 					break;
-				case 'delete':
+				/*case 'delete':
 					$this->_delete('keanggotaan',$id);
-					break;
+					break;*/
 				default:
 					$this->_template('keanggotaan/keanggotaan');
 					break;
@@ -257,6 +261,7 @@ class Main extends CI_Controller {
 					break;
 				case 'detail':
 					$data['kode'] = $id;
+					$data['kop'] = $this->Preference_model->get();
 					$this->_template('simpanan/detail_simpanan',$data);
 					break;
 				case 'ambil':
@@ -279,7 +284,8 @@ class Main extends CI_Controller {
 						$data['simpanan'] = $this->mdb->getLaporanSimpanan();
 						$this->load->view('simpanan/export',$data);
 					}else{
-						$this->_template('simpanan/laporan_simpanan');
+						$data['kop'] = $this->Preference_model->get();
+						$this->_template('simpanan/laporan_simpanan', $data);
 					}
 					break;
 				case 'delete':
@@ -304,9 +310,9 @@ class Main extends CI_Controller {
 	        $this->datatables->select('nasabah.kode, nasabah.nama, pinjaman.tanggal, pinjaman.jenis, FORMAT(pinjaman.jumlah, 0) as jumlah, pinjaman.lama, pinjaman.status, pinjaman.id, nasabah.kode', FALSE);
 	        $this->datatables->from('nasabah');
 	        $this->datatables->join('pinjaman','pinjaman.kode_nasabah=nasabah.kode');
-	        $this->datatables->edit_column('nasabah.nama', anchor('main/pinjaman/detail/$1','$2'), 'nasabah.kode, nasabah.nama');
+	        $this->datatables->edit_column('nasabah.nama', anchor('main/pinjaman/detail/$1','$2'), 'pinjaman.id, nasabah.nama');
 	        $this->datatables->edit_column('jumlah', '<div style="text-align:right;">$1</div>', 'jumlah');
-	        $this->datatables->edit_column('pinjaman.id', anchor('main/pinjaman/bayar?kode=$1','BAYAR','class="btn btn-info btn-mini hidden-print"'), 'nasabah.kode');
+	        $this->datatables->edit_column('pinjaman.id', anchor('main/pinjaman/detail/$1','BAYAR','class="btn btn-info btn-mini hidden-print"'), 'pinjaman.id');
 	        echo $this->datatables->generate();
 		}
 		else
@@ -342,12 +348,14 @@ class Main extends CI_Controller {
 					}
 					else
 					{
-						$this->mdb->edit_pinjaman();
+						$this->mdb->edit_pinjaman($id);
 						redirect('main/pinjaman');
 					}
 					break;
 				case 'detail':
 					$data['kode'] = $id;
+					$data['id'] = $id;
+					$data['kop'] = $this->Preference_model->get();
 					$this->_template('pinjaman/detail_pinjaman',$data);
 					break;
 				case 'bayar':
@@ -374,7 +382,8 @@ class Main extends CI_Controller {
 						$data['pinjaman'] = $this->mdb->getLaporanPinjaman();
 						$this->load->view('pinjaman/export',$data);
 				}else{
-					$this->_template('pinjaman/laporan_pinjaman');
+					$data['kop'] = $this->Preference_model->get();
+					$this->_template('pinjaman/laporan_pinjaman', $data);
 				}
 					break;
 				default:

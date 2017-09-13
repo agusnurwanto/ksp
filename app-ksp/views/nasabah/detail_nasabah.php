@@ -8,6 +8,9 @@
 		<?php $a = $this->nasabah->getDetail($data); 
 			foreach ($a as $key);
 		?>
+
+<?php echo $this->load->view('kop') ?>
+
 		<table class="table">
 			<tr>
 				<th>Kode Nasabah</th>

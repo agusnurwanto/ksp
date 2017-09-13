@@ -14,7 +14,7 @@
 <div class="widget widget-4 widget-body-white widget-tabs widget-tabs-2">
 <?php $this->load->view('template/menu_tab', array('hal'=>'pinjaman'));?>
 <br>
-<div class="heading-buttons">
+<!-- <div class="heading-buttons">
 	<div class="">
 		<h4 class="heading"><?php
 			echo form_open('','method="get"');
@@ -24,7 +24,7 @@
 		</h4>
 		<br>
 	</div>
-</div>
+</div> -->
 
 	<div class="widget-body" style="padding: 10px 0 0;">
 		<table class="dynamicTable table table-striped table-bordered table-primary table-condensed">

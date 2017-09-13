@@ -78,7 +78,7 @@ body.login{background:#171b19;}body.login .container-fluid{background:none;}body
 #menu .menu ul li.active a,#menu .menu ul ul li.active a{font-weight:600;background:#fafafa;}
 #menu .menu #search{position:relative;overflow:hidden;width:196px;height:30px;border:1px solid #dddddd;background:#fff;margin:15px auto;}#menu .menu #search input{border:none;height:30px;line-height:30px;padding:0;width:152px;margin:0;left:10px;position:absolute;top:0;box-shadow:none;}
 #menu .menu #search .glyphicons{width:34px;height:30px;background:#fff;border:none;padding:0;margin:0;position:absolute;top:0;right:0;}#menu .menu #search .glyphicons i:before{top:6px;left:9px;color:#cccccc;font-size:17px;}
-#content{padding:20px;}
+#content{padding:15px;}
 .menu-hidden #menu{display:none;}
 .menu-hidden #content{margin:0;}
 .menu-hidden .navbar.main .appbrand{display:none;}
